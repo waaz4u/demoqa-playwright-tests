@@ -1,4 +1,20 @@
+//###############################
+// 1. Login & 
+// 4. Validating Security
+// 6. Error messages validation
+//###############################
+
 import {test, expect} from '@playwright/test';
+
+test.beforeEach(async ({ page }, testInfo) => {
+    console.log(`Running ${testInfo.title}`);
+})
+
+test.afterEach(async ({ page }, testInfo) => {
+    console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+    if (testInfo.status !== testInfo.expectedStatus)
+        console.log(`Did not run as expected, ended up at ${page.url()}`);
+})
 
 test.describe('@smoke - Testing login', ()=>{
   test('test01_valid_username', async ({ page }) => {
@@ -20,12 +36,13 @@ test.describe('@smoke - Testing login', ()=>{
 
 
 test.describe('@negative - Testing login', ()=>{
+    
+
     test('test02_invalid_credentials',async ({page})=>{
         test.info().annotations.push({
           type: 'task',
           description: 'Test to verify invalid username message appears if username not correct ...',
         });
-
         await page.goto('https://demoqa.com/login');
         await page.getByPlaceholder('UserName').click();
         await page.getByPlaceholder('UserName').fill('test_username02');
@@ -59,7 +76,7 @@ test.describe('@negative - Testing login', ()=>{
     test('test04_no_credentials', async ({ page }) => {
         test.info().annotations.push({
             type: 'task',
-            description: 'Click login button with empty creds.',
+            description: 'Click login button with empty creds to valid error is raised.',
         });
 
         await page.goto('https://demoqa.com/login');

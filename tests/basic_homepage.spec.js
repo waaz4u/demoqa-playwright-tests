@@ -1,6 +1,16 @@
 // const { test, expect } = require("@playwright/test");
 import {test, expect} from '@playwright/test';
 
+test.beforeEach(async ({ page }, testInfo) => {
+    console.log(`Running ${testInfo.title}`);
+})
+
+test.afterEach(async ({ page }, testInfo) => {
+    console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+    if (testInfo.status !== testInfo.expectedStatus)
+        console.log(`Did not run as expected, ended up at ${page.url()}`);
+})
+
 test.describe('@smoke -Testing Home page basic elements', ()=>{
     test('test01',async ({page})=>{
         test.info().annotations.push({
@@ -52,7 +62,7 @@ test.describe('@smoke -Testing Home page basic elements', ()=>{
         const response = await page.request.get('https://demoqa.com/login');
         console.log("Page response for home url = ", response)
         await expect(response).toBeOK();
-        page.close()
+        await page.close()
 
     })
 });
