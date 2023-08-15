@@ -44,4 +44,15 @@ test.describe('@smoke -Testing Home page basic elements', ()=>{
         await page.close();
     });
     
+    test('test_04_validate_url_response', async ({page})=>{
+        test.info().annotations.push({
+            type: 'Task',
+            description: 'Verify homepage response is 2xx or OK',
+        });
+        const response = await page.request.get('https://demoqa.com/login');
+        console.log("Page response for home url = ", response)
+        await expect(response).toBeOK();
+        page.close()
+
+    })
 });
