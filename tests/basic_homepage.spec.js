@@ -1,7 +1,7 @@
 // const { test, expect } = require("@playwright/test");
 import {test, expect} from '@playwright/test';
 
-test.describe('Testing Home page basic elements', ()=>{
+test.describe('@smoke -Testing Home page basic elements', ()=>{
     test('test01',async ({page})=>{
         test.info().annotations.push({
             type: 'Task',
