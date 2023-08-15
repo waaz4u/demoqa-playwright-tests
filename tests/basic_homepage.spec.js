@@ -2,15 +2,12 @@
 import {test, expect} from '@playwright/test';
 
 test.describe('Testing Home page basic elements', ()=>{
-    test('user profile', async ({ page }) => {
+    test('test01',async ({page})=>{
         test.info().annotations.push({
-        type: 'task',
-        description: 'Testing few basic elements on home page',
+            type: 'Task',
+            description: 'Verify homepage url',
         });
-    // ...
-  });
 
-    test('test01 test url',async ({page})=>{
         // Open the home page to see url works.
         await page.goto('https://demoqa.com/login');
         // Check page url is correct.
@@ -21,6 +18,11 @@ test.describe('Testing Home page basic elements', ()=>{
     });
 
     test('test_02_verify_title',async ({page})=>{
+        test.info().annotations.push({
+            type: 'Task',
+            description: 'Verify page title is "DEMOQA"',
+        });
+
         await page.goto('https://demoqa.com/login');
         // Verify page title is DEMOQA.
         const pagetitle = await page.title();
@@ -30,6 +32,11 @@ test.describe('Testing Home page basic elements', ()=>{
     });
 
     test('test_03_verify_text_on_page',async ({page})=>{
+        test.info().annotations.push({
+            type: 'Task',
+            description: 'Verify homepage has "Login" text',
+        });
+
         await page.goto('https://demoqa.com/login');
         // Check text Login appears on the page.    
         const element = await page.getByText('Login');
