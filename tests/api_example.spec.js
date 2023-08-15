@@ -12,7 +12,7 @@ test.afterEach(async ({ page }, testInfo) => {
         console.log(`Did not run as expected, ended up at ${page.url()}`);
     })
 
-test.describe.serial.only('@smoke-Testing available api ', ()=>
+test.describe.serial('@smoke-Testing available api ', ()=>
 {
     const USERNAME = "test_username01";
     const PASSWORD = "Password01*";
