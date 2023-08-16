@@ -1,14 +1,22 @@
 name: Playwright Tests
 on:
+  workflow_dispatch:
+    inputs:
+      name: 
+        description: 'Reason for manual run?'
+        default: 'Automated run'
+        required: false
   push:
-    branches: [main, br2]
+    branches: [main]
   pull_request:
-    branches: [main, br2]
+    branches: [main]
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
+      - name: Show reason
+        run: echo "${{github.event.inputs.name}}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
