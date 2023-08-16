@@ -10,7 +10,13 @@ test.afterEach(async ({ page }, testInfo) => {
     console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
     if (testInfo.status !== testInfo.expectedStatus)
         console.log(`Did not run as expected, ended up at ${page.url()}`);
-    await page.screenshot({ path: 'screenshots/'+testInfo.title+Date.now()+'.png', fullPage: true });
+    else    
+        try{
+            await page.screenshot({ path: 'screenshots/'+testInfo.title+Date.now()+'.png', fullPage: true });
+        }
+        catch (err) {
+            console.log("Failed to get screenshot !!!")
+        }
 })
 
 test.describe('API : Authorized', ()=>{
