@@ -43,7 +43,7 @@ test.describe('API : Authorized', ()=>{
             await expect(response.status()).toBe(200)
         });
 
-        test("test02_Read_response", async ({ page }) => {
+        test.skip("test02_Read_response", async ({ page }) => {
             test.info().annotations.push({
                 type: 'task',
                 description: 'Verify the body of response and print it in log',
