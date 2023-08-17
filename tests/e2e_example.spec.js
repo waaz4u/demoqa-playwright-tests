@@ -14,7 +14,10 @@ import { json } from 'stream/consumers';
 test.beforeEach(async ({ page }, testInfo) => {
     console.log(`Running ${testInfo.title}`);
 })
-  
+
+const USERNAME = "test_username05";
+const PASSWORD = "Password01*";
+
 test.afterEach(async ({ page }, testInfo) => {
     console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
     if (testInfo.status !== testInfo.expectedStatus)
@@ -30,8 +33,6 @@ test.afterEach(async ({ page }, testInfo) => {
 
 test.describe.serial('Testing adding book to profile', ()=>{
     test('test01_Add_and_verify_book_via_webui', async ({page}) => {
-        const USERNAME = "test_username05";
-        const PASSWORD = "Password01*";
         test.info().annotations.push({
             type: 'task',
             description: 'Login, delete all books and add a book to user profile via webUI.',
@@ -78,8 +79,8 @@ test.describe.serial('Testing adding book to profile', ()=>{
     });
 
     test('test02_Check_users_book_via_api', async ({ request }) => {
-        const USERNAME = "test_username05";
-        const PASSWORD = "Password01*";
+        //const USERNAME = "test_username05";
+        //const PASSWORD = "Password01*";
         test.info().annotations.push({
             type: 'task',
             description: 'User API to get user profile info and see available books matches the one added via webui',
@@ -108,7 +109,7 @@ test.describe.serial('Testing adding book to profile', ()=>{
         }   
         })
         
-        // console.log('\n userID = ', await getUser.json())
+        console.log('\n userID = ', await getUser.json())
         let valUserIdJson = await getUser.json();    
         let userId = valUserIdJson.userId
         console.log("\n -- > user id = " + userId);
@@ -125,7 +126,7 @@ test.describe.serial('Testing adding book to profile', ()=>{
             data: {
             "userName": USERNAME, 
             "password": PASSWORD,
-        }   
+            }   
         })
         // console.log('\n -- > userIdData = ', await getUserData.json())
         let userDataJson = await getUserData.json();    
@@ -134,6 +135,6 @@ test.describe.serial('Testing adding book to profile', ()=>{
         console.log('Title of book = ', Title)
         // Verify added book via webUI is same received via api.
         await expect(Title == 'Git Pocket Guide').toBeTruthy()
-        await request.close()
+        //await request.close()
     })
 });
