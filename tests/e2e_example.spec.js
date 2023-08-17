@@ -1,4 +1,5 @@
 import {test, expect} from '@playwright/test';
+import exp from 'constants';
 import { json } from 'stream/consumers';
 
 //############################################
@@ -131,6 +132,8 @@ test.describe.serial('Testing adding book to profile', ()=>{
         let userDatabooks = userDataJson.books
         let Title = userDatabooks[0].title
         console.log('Title of book = ', Title)
+        // Verify added book via webUI is same received via api.
+        await expect(Title == 'Git Pocket Guide').toBeTruthy()
         await page.close()
     })
 });
