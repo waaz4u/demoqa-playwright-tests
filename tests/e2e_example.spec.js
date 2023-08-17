@@ -134,6 +134,6 @@ test.describe.serial('Testing adding book to profile', ()=>{
         console.log('Title of book = ', Title)
         // Verify added book via webUI is same received via api.
         await expect(Title == 'Git Pocket Guide').toBeTruthy()
-        await page.close()
+        await request.close()
     })
 });
